@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>Ebel.ValidationKit</RootNamespace>
+
+    <PackageId>Ebel.ValidatorKit</PackageId>
+    <Version>2.0.0</Version>
+    <PackageDescription>Lightweight validation library for CPF and Name with format and domain rules.</PackageDescription>
+    <RepositoryUrl>https://github.com/EbelBernardo/Ebel.ValidatorKit</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/EbelBernardo/Ebel.ValidatorKit</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageTags>validation;cpf;name;validator</PackageTags>
+    <Title>Ebel.ValidatorKit</Title>
+    <Summary>Package to validate CPF and Name</Summary>
+
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="../../Media/icon.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+</Project>

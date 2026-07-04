@@ -1,0 +1,43 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "src/Ebel.ValidationKit/**"
+      - "tests/Ebel.ValidationKit.Tests/**"
+
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "src/Ebel.ValidationKit/**"
+      - "tests/Ebel.ValidationKit.Tests/**"
+      - "CHANGELOG.md"
+      - "src/Ebel.ValidationKit/*.csproj"
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: "9.0.x"
+
+      - name: Build with .NET
+        run: dotnet build src/Ebel.ValidationKit --configuration Release
+
+      - name: Test
+        run: dotnet test tests/Ebel.ValidationKit.Tests
+
+      - name: Create the package
+        run: dotnet pack src/Ebel.ValidationKit --configuration Release
+
+      - name: Publish
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: dotnet nuget push "src/Ebel.ValidationKit/bin/Release/*.nupkg" -k ${{ secrets.NUGET_TOKEN }} -s https://api.nuget.org/v3/index.json --skip-duplicate
